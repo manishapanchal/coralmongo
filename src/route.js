@@ -1,9 +1,9 @@
 import React from "react";
 import Login from "./components/Login.js";
-import Basics from "./components/Basics.js";
+import Users from "./components/Users.js";
 import Layout from "./components/Layout.js";
 import HtmlCSS from "./components/HtmlCSS.js";
-import Users from "./components/Users.js";
+import ES6Basics from "./components/ES6Basics.js";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 const PrivateRoute = () => {
@@ -20,7 +20,7 @@ const Routers = () => {
       <Route element={<PrivateRoute />}>
         <Route path='/users' element={<Layout element={Users} />} />
         <Route path='/html-css' element={<Layout element={HtmlCSS} />} />
-        <Route path='/es6-basics' element={<Layout element={Basics} />} />
+        <Route path='/es6-basics' element={<Layout element={ES6Basics} />} />
       </Route>
     </Routes>
   );

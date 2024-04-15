@@ -249,4 +249,25 @@ export const Card = styled.div`
 
 export const ToggleButton = styled.button`
   margin-bottom: 10px;
+  width: max-content;
+  cursor: pointer;
+`;
+
+export const CodeContainer = styled.pre`
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  border-left: 3px solid #007bff;
+  color: #333;
+  page-break-inside: avoid;
+  font-family: monospace;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 1.6em;
+  max-width: 100%;
+  overflow: auto;
+  padding: 1em 1.5em;
+  display: block;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+  text-align: start;
 `;

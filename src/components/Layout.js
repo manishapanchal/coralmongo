@@ -5,7 +5,7 @@ import { Box, NavBar, MenuItemContainer } from "./Style.style";
 const navArr = [
   { label: "React-Basics", path: "/users" },
   { label: "Html-Css", path: "/html-css" },
-  { label: "ES-Basics", path: "/es6-basics" },
+  { label: "ES6-Basics", path: "/es6-basics" },
 ];
 
 const NavigationBar = () => {
