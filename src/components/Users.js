@@ -13,6 +13,31 @@ import {
   MainContainer,
 } from "./Style.style";
 
+export const UsersTable = ({ users }) => {
+  return (
+    <Table>
+      <TableHead>
+        <TableRow>
+          <TableHeaderCell>ID</TableHeaderCell>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>Age</TableHeaderCell>
+          <TableHeaderCell>Occupation</TableHeaderCell>
+        </TableRow>
+      </TableHead>
+      <tbody>
+        {users?.map((item, idx) => (
+          <TableRow key={idx}>
+            <TableCell>{idx + 1}</TableCell>
+            <TableCell>{item?.name}</TableCell>
+            <TableCell>{item?.age}</TableCell>
+            <TableCell>{item?.occupation}</TableCell>
+          </TableRow>
+        ))}
+      </tbody>
+    </Table>
+  );
+};
+
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -87,30 +112,7 @@ const Users = () => {
           <Button>Search</Button>
         </SearchBox>
         <MainContainer>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableHeaderCell>ID</TableHeaderCell>
-                <TableHeaderCell>Name</TableHeaderCell>
-                <TableHeaderCell onClick={() => requestSort("age")}>
-                  Age{" "}
-                  {sortConfig.key === "age" &&
-                    `(${sortConfig.direction === "ascending" ? "↑" : "↓"})`}
-                </TableHeaderCell>
-                <TableHeaderCell>Occupation</TableHeaderCell>
-              </TableRow>
-            </TableHead>
-            <tbody>
-              {filteredUsers?.map((item, idx) => (
-                <TableRow key={idx}>
-                  <TableCell>{idx + 1}</TableCell>
-                  <TableCell>{item?.name}</TableCell>
-                  <TableCell>{item?.age}</TableCell>
-                  <TableCell>{item?.occupation}</TableCell>
-                </TableRow>
-              ))}
-            </tbody>
-          </Table>
+          <UsersTable users={filteredUsers} />
         </MainContainer>
       </InnerContainer>
     </Container>

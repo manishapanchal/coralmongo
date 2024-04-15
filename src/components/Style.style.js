@@ -232,26 +232,21 @@ export const Loader = styled.div`
   z-index: 1000;
 `;
 
-// const requestSort = (key) => {
-//   let direction = "ascending";
-//   if (sortConfig.key === key && sortConfig.direction === "ascending") {
-//     direction = "descending";
-//   }
-//   setSortConfig({ key, direction });
-// };
+export const CardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+`;
 
-// const sortUsers = () => {
-//   const sortableData = [...filterdUsers];
-//   if (sortConfig !== null) {
-//     sortableData.sort((a, b) => {
-//       if (a[sortConfig.key] < b[sortConfig.key]) {
-//         return sortConfig.direction === "ascending" ? -1 : 1;
-//       }
-//       if (a[sortConfig.key] > b[sortConfig.key]) {
-//         return sortConfig.direction === "ascending" ? 1 : -1;
-//       }
-//       return 0;
-//     });
-//   }
-//   return sortableData;
-// };
+export const Card = styled.div`
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0.08) 0px 1px 2px;
+`;
+
+export const ToggleButton = styled.button`
+  margin-bottom: 10px;
+`;
