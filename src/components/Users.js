@@ -50,7 +50,9 @@ const Users = () => {
         occupation?.toLowerCase().includes(value.toLowerCase())
       );
     });
-    setFilteredUsers(filteredUsers);
+    if (filteredUsers?.length > 0) {
+      setFilteredUsers(filteredUsers);
+    }
   };
 
   const requestSort = (key) => {
@@ -99,7 +101,7 @@ const Users = () => {
               </TableRow>
             </TableHead>
             <tbody>
-              {sortedUsers().map((item, idx) => (
+              {filteredUsers?.map((item, idx) => (
                 <TableRow key={idx}>
                   <TableCell>{idx + 1}</TableCell>
                   <TableCell>{item?.name}</TableCell>
