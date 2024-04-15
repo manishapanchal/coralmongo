@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+
+.elementContainer {
+  width: 100%;
+  padding: 0 145px;
+  transition: 0.3s ease-in-out;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+}
