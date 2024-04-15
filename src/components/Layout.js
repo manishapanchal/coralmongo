@@ -29,6 +29,7 @@ const NavigationBar = () => {
     </NavBar>
   );
 };
+
 const Layout = (props) => {
   return (
     <Box>

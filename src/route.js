@@ -9,11 +9,12 @@ import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 const PrivateRoute = ({ token }) => {
   if (token) {
     return <Outlet />;
-  } else return <Navigate to={"/login"} />;
+  } else return <Navigate to={"/"} />;
 };
 
 const Routers = () => {
-  const token = "sdddddddddd"; //localStorage.getItem("accessToken") || true;
+  const token = localStorage.getItem("accessToken");
+  console.log("token = ", token);
   return (
     <Routes>
       <Route path='/' element={<Login />} />

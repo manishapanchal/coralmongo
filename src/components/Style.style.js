@@ -121,6 +121,13 @@ export const Button = styled.button`
   font-family: Inter;
   border-radius: 0px 8px 8px 0px;
   background: #1c64f2;
+
+  ${(props) =>
+    props.isLogin &&
+    css`
+      width: max-content;
+      border-radius: 8px;
+    `}
 `;
 
 export const TableContainer = styled.div`
@@ -162,6 +169,67 @@ export const IconBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+export const FormContainer = styled.div`
+  width: 30%;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  left: 0;
+  top: 10%;
+  right: 0;
+  margin: 0px auto;
+`;
+
+export const Title = styled.h2`
+  text-align: center;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 15px;
+`;
+
+export const FormGroup = styled.div`
+  margin-bottom: 15px;
+`;
+
+export const Label = styled.label`
+  font-weight: bold;
+`;
+
+export const Input = styled.input`
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+`;
+
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Loader = styled.div`
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+  z-index: 1000;
 `;
 
 // const requestSort = (key) => {
