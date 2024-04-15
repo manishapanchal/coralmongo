@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useEffect } from "react";
 import ScreenLoader from "./ScreenLoader";
 import {
   Form,
@@ -18,12 +19,17 @@ const Login = () => {
   const [loading, setLoding] = useState(false);
   const [password, setPassword] = useState("");
 
+  useEffect(() => {
+    const authToken = localStorage.getItem("accessToken");
+    if (authToken?.length > 0) navigate("/users");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleSubmit = async (e) => {
     try {
-      setLoding(true);
       e.preventDefault();
+      setLoding(true);
       const data = { email, password };
-      // console.log("data = ", data);
       const res = await axios.post(
         "https://coralmango.com/api/react-test-auth",
         data
@@ -31,7 +37,7 @@ const Login = () => {
       // console.log("res = ", res);
       setLoding(false);
       if (res?.data?.success) {
-        console.log(res?.data?.authToken);
+        // console.log(res?.data?.authToken);
         localStorage.setItem("accessToken", res?.data?.authToken);
         navigate("/users");
       } else {

@@ -6,19 +6,18 @@ import HtmlCSS from "./components/HtmlCSS.js";
 import Users from "./components/Users.js";
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
-const PrivateRoute = ({ token }) => {
+const PrivateRoute = () => {
+  const token = localStorage.getItem("accessToken");
   if (token) {
     return <Outlet />;
   } else return <Navigate to={"/"} />;
 };
 
 const Routers = () => {
-  const token = localStorage.getItem("accessToken");
-  console.log("token = ", token);
   return (
     <Routes>
       <Route path='/' element={<Login />} />
-      <Route element={<PrivateRoute token={token} />}>
+      <Route element={<PrivateRoute />}>
         <Route path='/users' element={<Layout element={Users} />} />
         <Route path='/html-css' element={<Layout element={HtmlCSS} />} />
         <Route path='/es6-basics' element={<Layout element={Basics} />} />

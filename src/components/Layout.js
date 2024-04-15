@@ -9,6 +9,7 @@ const navArr = [
 ];
 
 const NavigationBar = () => {
+  const handleLogout = () => localStorage.removeItem("accessToken");
   return (
     <NavBar>
       <MenuItemContainer>
@@ -25,6 +26,9 @@ const NavigationBar = () => {
             </NavLink>
           );
         })}
+        <NavLink to={"/"} className='menuItem' onClick={handleLogout}>
+          Logout
+        </NavLink>
       </MenuItemContainer>
     </NavBar>
   );
