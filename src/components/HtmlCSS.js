@@ -12,7 +12,7 @@ import {
 
 const HtmlCSS = () => {
   const [users, setUsers] = useState([]);
-  const [view, setView] = useState("table");
+  const [view, setView] = useState("card");
 
   const toggleView = () => {
     setView(view === "table" ? "card" : "table");
