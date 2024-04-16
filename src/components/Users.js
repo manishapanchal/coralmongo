@@ -40,6 +40,11 @@ export const UsersTable = (props) => {
             <TableCell>{item?.occupation}</TableCell>
           </TableRow>
         ))}
+        {users.length === 0 && (
+          <TableRow>
+            <TableCell colSpan={4}>No records</TableCell>
+          </TableRow>
+        )}
       </tbody>
     </Table>
   );
@@ -72,6 +77,10 @@ const Users = () => {
 
   const filterResults = (e) => {
     const value = e?.target?.value;
+    setSearchData(false);
+    if (value) {
+      setSearchData(true);
+    }
     const filteredUsers = users.filter((item) => {
       const { name = "", age = "", occupation = "" } = item;
       const userAge = `${age}`;
@@ -81,10 +90,7 @@ const Users = () => {
         occupation?.toLowerCase().includes(value.toLowerCase())
       );
     });
-    if (filteredUsers?.length > 0) {
-      setSearchData(true);
-      setFilteredUsers(filteredUsers);
-    } else setSearchData(false);
+    setFilteredUsers(filteredUsers);
   };
 
   const sortByName = () => {
@@ -126,8 +132,10 @@ const Users = () => {
     <Container>
       <InnerContainer>
         <SearchBox>
-          <input type='text' onChange={filterResults} />
-          <Button>Search</Button>
+          <div>
+            <input type='text' onChange={filterResults} />
+            <Button type='button'>Search</Button>
+          </div>
           {isSearchData && <Banner>You are viewing filtered results!</Banner>}
         </SearchBox>
         <MainContainer>
