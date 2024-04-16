@@ -1,26 +1,33 @@
 import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import {
+  Table,
   Button,
+  Banner,
+  TableRow,
   SearchBox,
   Container,
   TableHead,
-  TableRow,
-  Table,
   TableCell,
+  MainContainer,
   InnerContainer,
   TableHeaderCell,
-  MainContainer,
 } from "./Style.style";
 
-export const UsersTable = ({ users }) => {
+export const UsersTable = (props) => {
+  const { users, ageDirection, nameDirection, sortByAge, sortByName } = props;
+
   return (
     <Table>
       <TableHead>
         <TableRow>
           <TableHeaderCell>ID</TableHeaderCell>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>Age</TableHeaderCell>
+          <TableHeaderCell onClick={sortByName}>
+            Name {nameDirection === "ascending" ? "↑" : "↓"}
+          </TableHeaderCell>
+          <TableHeaderCell onClick={sortByAge}>
+            Age {ageDirection === "ascending" ? "↑" : "↓"}
+          </TableHeaderCell>
           <TableHeaderCell>Occupation</TableHeaderCell>
         </TableRow>
       </TableHead>
@@ -40,11 +47,10 @@ export const UsersTable = ({ users }) => {
 
 const Users = () => {
   const [users, setUsers] = useState([]);
+  const [isSearchData, setSearchData] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [sortConfig, setSortConfig] = useState({
-    key: null,
-    direction: "ascending",
-  });
+  const [ageDirection, setAgeDirection] = useState("ascending");
+  const [nameDirection, setNameDirection] = useState("ascending");
 
   const getData = useCallback(async () => {
     try {
@@ -76,32 +82,44 @@ const Users = () => {
       );
     });
     if (filteredUsers?.length > 0) {
+      setSearchData(true);
       setFilteredUsers(filteredUsers);
-    }
+    } else setSearchData(false);
   };
 
-  const requestSort = (key) => {
-    let direction = "ascending";
-    if (sortConfig.key === key && sortConfig.direction === "ascending") {
-      direction = "descending";
-    }
-    setSortConfig({ key, direction });
-  };
-
-  const sortedUsers = () => {
+  const sortByName = () => {
+    const direction =
+      nameDirection === "ascending" ? "descending" : "ascending";
+    setNameDirection(direction);
     const sortableUsers = [...filteredUsers];
-    if (sortConfig !== null) {
-      sortableUsers.sort((a, b) => {
-        if (a[sortConfig.key] < b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? -1 : 1;
-        }
-        if (a[sortConfig.key] > b[sortConfig.key]) {
-          return sortConfig.direction === "ascending" ? 1 : -1;
-        }
-        return 0;
-      });
-    }
-    return sortableUsers;
+    sortableUsers.sort((a, b) => {
+      if (a["name"] < b["name"]) {
+        return nameDirection === "ascending" ? -1 : 1;
+      }
+      if (a["name"] > b["name"]) {
+        return nameDirection === "ascending" ? 1 : -1;
+      }
+      return 0;
+    });
+    // console.log("sortableUsers = ", sortableUsers);
+    setFilteredUsers([...sortableUsers]);
+  };
+
+  const sortByAge = () => {
+    const direction = ageDirection === "ascending" ? "descending" : "ascending";
+    setAgeDirection(direction);
+    const sortableUsers = [...filteredUsers];
+    sortableUsers.sort((a, b) => {
+      if (a["age"] < b["age"]) {
+        return ageDirection === "ascending" ? -1 : 1;
+      }
+      if (a["age"] > b["age"]) {
+        return ageDirection === "ascending" ? 1 : -1;
+      }
+      return 0;
+    });
+    // console.log("sortableUsers = ", sortableUsers);
+    setFilteredUsers([...sortableUsers]);
   };
 
   return (
@@ -110,9 +128,16 @@ const Users = () => {
         <SearchBox>
           <input type='text' onChange={filterResults} />
           <Button>Search</Button>
+          {isSearchData && <Banner>You are viewing filtered results!</Banner>}
         </SearchBox>
         <MainContainer>
-          <UsersTable users={filteredUsers} />
+          <UsersTable
+            users={filteredUsers}
+            sortByAge={sortByAge}
+            sortByName={sortByName}
+            ageDirection={ageDirection}
+            nameDirection={nameDirection}
+          />
         </MainContainer>
       </InnerContainer>
     </Container>

@@ -162,6 +162,7 @@ export const TableCell = styled.td`
 
 export const TableHeaderCell = styled.th`
   padding: 8px;
+  cursor: pointer;
   border: 1px solid #dddddd;
 `;
 
@@ -270,4 +271,12 @@ export const CodeContainer = styled.pre`
   word-wrap: break-word;
   white-space: pre-wrap;
   text-align: start;
+`;
+
+export const Banner = styled.div`
+  background: rgb(235, 245, 255);
+  color: #0b57d0;
+  padding: 12px;
+  border-radius: 4px;
+  margin: 0px 12px;
 `;
